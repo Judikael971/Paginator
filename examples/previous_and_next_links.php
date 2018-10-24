@@ -22,4 +22,31 @@ $param = array(
 );
 $paginator = new \Paginator\Paginator($param);
 $paginator->calculMaxPage($nombreDeResultats);
+
+$linesPerPages = $paginator->__get('linesPerPages');
+$index = $linesPerPages*$activePage-$linesPerPages;
+
+echo '<table>
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Date</th>
+				<th>Titre</th>
+			</tr>
+		</thead>
+		<tbody>';
+for ($i = $index; $i<($index+$linesPerPages); $i++)
+{
+	if(array_key_exists($i, $results))
+	{
+		echo '<tr>
+				<td>'.$results[$i]['id'].'</td>
+				<td>'.$results[$i]['date'].'</td>
+				<td>'.$results[$i]['title'].'</td>
+			</tr>';
+	}
+}
+echo '
+		</tbody>
+	</table>';
 echo $paginator->generateHtml();
