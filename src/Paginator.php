@@ -486,7 +486,7 @@ class Paginator
 
 	protected function addFirstAndEmptyLink()
 	{
-		if($this->__get('maxPage') > 1) {
+		if($this->__get('maxPage') > 1 && $this->__get('activePage')-1 > 1 && $this->__get('maxPage') > $this->__get('linesPerPages')) {
 			$this->addFirstPageLink(1);
 			if ($this->__get('activePage') > 2) {
 				$this->addEmptyPageLink();
@@ -497,7 +497,7 @@ class Paginator
 	protected function addLastAndEmptyLink()
 	{
 		if($this->__get('maxPage') > 1) {
-			if($this->__get('activePage') < $this->__get('maxPage')-1)
+			if($this->__get('activePage') < $this->__get('maxPage')-1 && $this->__get('activePage')+1 > $this->__get('maxPage'))
 			{
 				$this->addEmptyPageLink();
 			}
